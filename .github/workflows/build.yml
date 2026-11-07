@@ -13,14 +13,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Zip dosyasını aç
         run: unzip -q -o KriptoBotAndroid.zip
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - uses: android-actions/setup-android@v3
+      - name: Android SDK lisanslarını kabul et
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
